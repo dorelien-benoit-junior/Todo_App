@@ -24,7 +24,7 @@ function App() {
   function add(task) {
     const newTask = { ...task, id: uuidv4() };
     setTaskList((previous) => [...previous, newTask]);
-    setFormData({ title: "", desc: "" });
+    setFormData({ title: "", desc: "", isComplete: false });
   }
 
   function deleteTask(id) {
@@ -33,6 +33,13 @@ function App() {
   }
 
   function complete(id) {
+    const updatedList = taskList.map((task) => {
+      if (task.id === id){
+        return {...task, isComplete: true };
+      }
+      return task;
+    });
+    setTaskList(updatedList)
     // TODO
     // Hints: nou itilize fonksyon filter nou ka itilize fonksyon findIndex, Nou ka itilize fonksyon find
   }
@@ -62,8 +69,8 @@ function App() {
       <div>
         <h2>To do</h2>
         <ul>
-          {taskList.map((task, index) => (
-            <li key={index}>
+          {taskList.map((task) => (
+            <li key={task.id}>
               <p>{task.title}</p>
               <p>{task.desc}</p>
               <button onClick={() => deleteTask(task.id)}>
@@ -71,7 +78,7 @@ function App() {
                 Delete
               </button>
               {/* Update button sa poul ka deklanche fonksyon konplete a */}
-              <button>
+              <button onClick={ () => complete(task.id)}>
                 <CheckCircle color="green" size={iconSize} />
                 Complete
               </button>
@@ -82,6 +89,14 @@ function App() {
 
       <div>
         <h2>Completed</h2>
+        <ul>
+          {taskList.filter((task) => task.isComplete).map((task) => (
+            <li key={task.id}>
+              <p>{task.title}</p>
+              <p>{task.desc}</p>
+            </li>
+          ))}
+        </ul>
         {/* TODO
         afiche tout tach ki konplete yo
         hint: itilize filter sou champ isComplete
