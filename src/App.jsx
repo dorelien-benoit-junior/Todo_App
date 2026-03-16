@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Plus } from "lucide-react";
 import { Trash } from "lucide-react";
 import { CheckCircle } from "lucide-react";
+import "./App.css"
 
 function App() {
   const iconSize =16
@@ -62,7 +63,7 @@ function App() {
           value={formData.desc}
         />
         <button type="button" onClick={() => add(formData)}>
-          <Plus color="green" size={iconSize} /> Ajouter
+          <Plus color="white" size={iconSize} /> Ajouter
         </button>
       </form>
 
@@ -74,12 +75,12 @@ function App() {
               <p>{task.title}</p>
               <p>{task.desc}</p>
               <button onClick={() => deleteTask(task.id)}>
-                <Trash color="red" size={iconSize} />
+                <Trash color="white" size={iconSize} />
                 Delete
               </button>
               {/* Update button sa poul ka deklanche fonksyon konplete a */}
               <button onClick={ () => complete(task.id)}>
-                <CheckCircle color="green" size={iconSize} />
+                <CheckCircle color="white" size={iconSize} />
                 Complete
               </button>
             </li>
